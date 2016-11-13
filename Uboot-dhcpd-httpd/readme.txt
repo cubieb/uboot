@@ -1,0 +1,1 @@
+original code is from MediaTek_ApSoC_SDK_4320_20150414.tar.bz2
