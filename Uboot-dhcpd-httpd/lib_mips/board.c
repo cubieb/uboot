@@ -130,12 +130,14 @@ static char  file_name_space[ARGV_LEN];
 __attribute__((nomips16)) void dram_cali(void);
 #endif
 
+# ifdef HTTPD_SUPPORT
 //added by mango
 void gpio_init(void);
 void led_on(void);
 void led_off(void);
 int detect_wps(void);
 void gpio_test( void );
+# endif
 static void Init_System_Mode(void)
 {
 	u32 reg;
@@ -1967,6 +1969,7 @@ __attribute__((nomips16)) void board_init_r (gd_t *id, ulong dest_addr)
 	    s = getenv ("bootdelay");
 	    timer1 = s ? (int)simple_strtol(s, NULL, 10) : CONFIG_BOOTDELAY;
 	}
+# ifdef HTTPD_SUPPORT
 /*web failsafe*/
 	gpio_init();
 	printf( "\nif you press the WPS button for more than 2 seconds will automatically enter the Update mode,more than 7 seconds enter gpio test mode\n");
@@ -1996,6 +1999,7 @@ __attribute__((nomips16)) void board_init_r (gd_t *id, ulong dest_addr)
 		printf( "\n\nContinuing normal boot...\n\n");
 	}
 /*failsafe end!*/
+# endif
 	OperationSelect();   
 	while (timer1 > 0) {
 		--timer1;
@@ -2878,6 +2882,7 @@ void disable_pcie(void)
 	RALINK_REG(RT2880_CLKCFG1_REG) = val;
 #endif
 }
+# ifdef HTTPD_SUPPORT
 //added by mango 20160120
 //wled_n GPIO44 WLAN_AN_MODE 2b01
 //WDT GPIO38 WDT_MODE 1b1
@@ -2988,7 +2993,7 @@ void gpio_test( void )
 	RALINK_REG(0xb0000620)=gpio_dat0;
 	RALINK_REG(0xb0000624)=gpio_dat1;
 }
-
+# endif
 #endif
 
 #if defined (CONFIG_DDR_CAL)

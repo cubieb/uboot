@@ -495,6 +495,8 @@ extern unsigned int  CFG_BLOCKSIZE;
 #if defined (MT7621_ASIC_BOARD) || defined (MT7621_FPGA_BOARD)
 //#define USE_PIO_DBG		1
 #endif
+
+# ifdef HTTPD_SUPPORT
 /*
  * Web Failsafe configuration
  */
@@ -529,6 +531,7 @@ extern unsigned int  CFG_BLOCKSIZE;
 #define WEBFAILSAFE_UPGRADE_TYPE_FIRMWARE		0
 #define WEBFAILSAFE_UPGRADE_TYPE_UBOOT			1
 #define WEBFAILSAFE_UPGRADE_TYPE_ART			2
+# endif
 
 #if defined(MT7628_ASIC_BOARD)
 #define PHY_BASE                0xB0120000

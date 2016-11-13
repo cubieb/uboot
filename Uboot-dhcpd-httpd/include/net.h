@@ -337,12 +337,14 @@ extern int		NetRestartWrap;		/* Tried all network devices	*/
 
 typedef enum { BOOTP, RARP, ARP, TFTP, DHCP, PING, DNS, NFS, CDP, NETCONS } proto_t;
 
+# ifdef HTTPD_SUPPORT
 static inline void eth_set_last_protocol(int protocol){
 #ifdef CONFIG_NETCONSOLE
 extern proto_t net_loop_last_protocol;
 net_loop_last_protocol = protocol;
 #endif
 }
+# endif
 
 /* from net/net.c */
 extern char	BootFile[128];			/* Boot File name		*/
@@ -359,8 +361,10 @@ extern ushort CDPApplianceVLAN;
 
 /* Initialize the network adapter */
 extern int	NetLoop(proto_t);
+# ifdef HTTPD_SUPPORT
 extern int      NetLoopHttpd(void);
 extern void     NetSendHttpd(void);
+# endif
 
 /* Shutdown adapters and cleanup */
 extern void	NetStop(void);

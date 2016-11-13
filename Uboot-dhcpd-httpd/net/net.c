@@ -96,6 +96,7 @@
 #define ET_DEBUG
 #endif
 
+# ifdef HTTPD_SUPPORT
 /**uip , added by mleaf 20160415 **/
 extern int NetUipLoop;
 void dev_received(volatile uchar * inpkt, int len);
@@ -107,6 +108,7 @@ int	webfailsafe_ready_for_upgrade = 0;
 int	webfailsafe_upgrade_type = WEBFAILSAFE_UPGRADE_TYPE_FIRMWARE;
 void NetReceiveHttpd( volatile uchar * inpkt, int len );
 extern int do_reset( cmd_tbl_t *cmdtp, int flag, int argc, char *argv[] );
+# endif
 
 /** BOOTP EXTENTIONS **/
 
@@ -1170,10 +1172,12 @@ NetReceive(volatile uchar * inpkt, int len)
 #ifdef ET_DEBUG
 	printf("packet received\n");
 #endif
+# ifdef HTTPD_SUPPORT
 	 if(NetUipLoop) {
 		dev_received(inpkt, len);
 		return;
 	}
+# endif
 	NetRxPkt = inpkt;
 	NetRxPktLen = len;
 	et = (Ethernet_t *)inpkt;

@@ -191,9 +191,11 @@ LIBS += cpu/$(CPU)/$(SOC)/lib$(SOC).a
 endif
 LIBS += lib_$(ARCH)/lib$(ARCH).a
 LIBS += net/libnet.a
+ifeq ($(HTTPD_SUPPORT),y)
 #LIBS += httpd/libhttpd.a
 #for uip1.0 mleaf 20151016
 LIBS += uip/libuip.a
+endif
 #LIBS += rtc/librtc.a
 LIBS += drivers/libdrivers.a
 

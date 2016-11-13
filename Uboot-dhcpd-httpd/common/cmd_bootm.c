@@ -177,8 +177,9 @@ int do_bootm (cmd_tbl_t *cmdtp, int flag, int argc, char *argv[])
 	char	*name, *s;
 	int	(*appl)(int, char *[]);
 	image_header_t *hdr = &header;
+#ifdef HTTPD_SUPPORT
 	DECLARE_GLOBAL_DATA_PTR;
-
+#endif
 	//mips_cache_set(3);
 
 	s = getenv ("verify");
@@ -268,8 +269,10 @@ int do_bootm (cmd_tbl_t *cmdtp, int flag, int argc, char *argv[])
 #endif				
 			{	
 		SHOW_BOOT_PROGRESS (-1);
+#ifdef HTTPD_SUPPORT
 		eth_initialize(gd->bd);
 		run_command("uip start", 0);//add by mleaf start uip
+#endif
 		return 1;
 	    }
 	}

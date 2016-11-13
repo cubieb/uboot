@@ -1522,6 +1522,8 @@ if [ "$LAN_WAN_PARTITION" = "y" ]; then
 fi
 fi
 
+bool "upgrade with dhcpd and httpd" HTTPD_SUPPORT
+
 if [ "$UBOOT_RAM" = "y" ]; then
 define_hex TEXT_BASE  0x80200000
 else

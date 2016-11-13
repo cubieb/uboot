@@ -240,6 +240,9 @@ endif
 ifeq ($(ON_BOARD_DDR2),y)
 CPPFLAGS += -DRALINK_DDR_POWERSAVE -DCONFIG_DDR_CAL
 endif
+ifeq ($(HTTPD_SUPPORT),y)
+CPPFLAGS += -DHTTPD_SUPPORT 
+endif
 endif
 
 ifeq ($(MT7621_MP),y)
